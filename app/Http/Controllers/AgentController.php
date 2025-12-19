@@ -52,7 +52,7 @@ class AgentController extends Controller
 
                     // Get the articles
                     $articles = $articlesQuery->orderBy('date', 'desc')
-                        ->limit(10)
+                        ->limit(4)
                         ->get();
 
                     if ($articles->isEmpty()) {
@@ -132,7 +132,7 @@ class AgentController extends Controller
                 Log::info('Tool created');
 
                 // Build messages from history
-                $history = $request->input('history', []);
+                $history = array_slice($request->input('history', []), -3);
                 $messages = [];
                 
                 foreach ($history as $msg) {
